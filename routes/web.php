@@ -19,3 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('mahasiswa', MahasiswaController::class);
+Route::get('cari',[MahasiswaController::class, 'cari'])->name('cari');

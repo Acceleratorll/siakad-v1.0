@@ -5,7 +5,15 @@
  <div class="pull-left mt-2">
  <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
  </div>
- <div class="float-right my-2">
+                <div class="float-md-right mt-3">
+                        <form action="{{ route('cari') }}" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Name" name="cari" value="{{  old('cari') }}">
+                                <button class="btn btn-success" type="submit" value="cari">Search</button>
+                            </div>
+                        </form>
+                </div>
+ <div class="float-left my-2">
  <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
  </div>
  </div>
