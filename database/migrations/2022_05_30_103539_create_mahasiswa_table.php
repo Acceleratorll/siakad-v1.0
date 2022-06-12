@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_mahasiswa');
             $table->string('nim', 10)->index();
             $table->string('nama', 25)->index();
-            $table->string('kelas', 5);
+            $table->string('kelas', 5); 
             $table->string('email', 55);
             $table->string('alamat', 155);
             $table->date('tgl_lahir');
