@@ -7,14 +7,10 @@
         </div>
     </div>
     <div class="col-lg-12 margin-tb">
-        <p><b>Nama :</b> {{ $mhs_matakuliah->mahasiswa->nama }}<br>
-        <b>NIM :</b> {{ $mhs_matakuliah->mahasiswa->nim }}<br>
+        <p><b>Nama :</b> {{ $mhs->nama }}<br>
+        <b>NIM :</b> {{ $mhs->nim }}<br>
         {{-- <b>Kelas :</b> {{ $mhs_matakuliah->mahasiswa->kelas_id->nama_kelas }}</p> --}}
     </div>
-</div>    
-<div class="float-md-right mt-3">
-    <a class="btn btn-success" href="{{ route('cetak_pdf', $mhs_matakuliah->mahasiswa->id_mahasiswa) }}">Cetak KHS</a>
-</div>
 </div>
 
     <table class="table table-bordered">
@@ -24,7 +20,7 @@
             <th>Semester</th>
             <th>Nilai</th>
         </tr>
-        @foreach ($mhs_matakuliah as $mk)
+        @foreach ($matkul as $mk)
         <tr>
             <td>{{ $mk->matakuliah->nama_matkul }}</td>
             <td>{{ $mk->matakuliah->sks }}</td>
@@ -34,3 +30,4 @@
         @endforeach
     </table>
 @endsection
+

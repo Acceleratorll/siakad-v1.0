@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kelas;
 use App\Models\Mahasiswa_MataKuliah;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -29,13 +31,14 @@ class MahasiswaController extends Controller
             'Nama' => 'required',
             'Kelas' => 'required',
             'Jurusan' => 'required',
-            
+            'Foto' => 'required'
         ]);
         $mahasiswa = new Mahasiswa;
         $mahasiswa->nim = $request->get('Nim');
         $mahasiswa->nama = $request->get('Nama');
         $mahasiswa->jurusan = $request->get('Jurusan');
         $mahasiswa->kelas_id = $request->get('Kelas');
+        // $mahasiswa->foto = $image_name;
         $mahasiswa->save();
         
         $kelas = new Kelas;
@@ -103,5 +106,13 @@ class MahasiswaController extends Controller
         $mhs_matakuliah = Mahasiswa_Matakuliah::with('matakuliah')->where('mahasiswa_id', $id)->get();
         $mhs_matakuliah -> mahasiswa = Mahasiswa::where('nim', $id)->first();
         return view('mahasiswa.nilai', ['mhs_matakuliah' => $mhs_matakuliah]);
+    }
+
+    public function cetak_pdf($id)
+    {
+        $mhs = Mahasiswa::with('kelas')->where('id_mahasiswa', $id)->first();
+        $matkul = Mahasiswa_MataKuliah::with('matakuliah')->where('mahasiswa_id', $id)->get();
+        $pdf = PDF::loadview('mahasiswa.mhs_pdf', ['mhs' => $mhs, 'matkul' => $matkul]);
+        return $pdf->stream();
     }
 };    
